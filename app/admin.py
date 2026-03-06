@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+
+# 1 вариант зарегестрировать таблицу
+# Класс NotesAdmin нужен чтобы настроить как таблица выглядит в админ панели.
+
