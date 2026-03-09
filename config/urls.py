@@ -21,6 +21,6 @@ from app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.urls')),
-    path('smart', include('notes.urls')),
-    path('error', views.error),
+    path('smart/', include('notes.urls')),
+    path('error/', views.error),
 ]
