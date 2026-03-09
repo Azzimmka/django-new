@@ -5,5 +5,8 @@
     <body>
         <h1>Welcome to SmartNotes</h1>
         <p>{{today}}</p>
+        <a href="{% url 'notes-list' %}">My notes</a>
+        <a href="{% url 'popular-notes' %}">Popular notes</a>
+
     </body>
 </html>

@@ -10,7 +10,11 @@
     {% for note in notes %}
         <p>{{ note.title }}</p>
         <p>{{ note.text }}</p>
+        <p>{{ note.likes }}</p>
+        <a href="{% url 'notes-detail' note.pk %}">See detail</a>
         <hr>
     {% endfor %}
+
+
 </body>
 </html>
