@@ -6,3 +6,13 @@ class Notes(models.Model):
     text = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'notes'
+        verbose_name = 'Note'
+        verbose_name_plural = 'Notes'
+
+
