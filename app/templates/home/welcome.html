@@ -1,15 +1,14 @@
-{% load static %}
-<html>
-    <head>
-        <title>Smart notes</title>
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-    </head>
-    <body>
-        <h1>Welcome to SmartNotes</h1>
-        <p>{{today}}</p>
-        <a href="{% url 'notes-list' %}">My notes</a>
-        <a href="{% url 'popular-notes' %}">Popular notes</a>
+{% extends 'base.html' %}
+{% block content %}
+    <div class=" flex items-center justify-center bg-gray-50 mt-5">
+        <div class="text-center bg-white rounded-2xl shadow-xl p-12 max-w-lg">
+            <h1 class="text-5xl font-bold mb-4">📝 SmartNotes</h1>
+            <p class="text-gray-400 text-sm mb-8">{{ today|date:"d.m.Y" }}</p>
 
-
-    </body>
-</html>
+            <div class="flex flex-col gap-4">
+                <a href="{% url 'notes-list' %}" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors text-lg font-semibold">📋 My Notes</a>
+                <a href="{% url 'popular-notes' %}" class="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition-colors text-lg font-semibold">🔥 Popular Notes</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

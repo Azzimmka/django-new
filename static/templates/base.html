@@ -1,0 +1,37 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'style.css' %}" >
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+        <style>
+            body{
+                font-family: "Nunito", sans-serif;
+                font-optical-sizing: auto;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50 min-h-screen">
+        <header class="bg-white shadow-md">
+            <div class="max-w-[1200px] m-auto flex items-center justify-between px-6 py-4">
+                <a href="{% url 'welcome' %}" class="text-2xl font-bold text-blue-600">📝 SmartNotes</a>
+                <nav class="flex gap-6">
+                    <a href="{% url 'notes-list' %}" class="text-gray-600 hover:text-blue-500 transition-colors font-medium">📋 Notes</a>
+                    <a href="{% url 'popular-notes' %}" class="text-gray-600 hover:text-red-500 transition-colors font-medium">🔥 Popular</a>
+                </nav>
+                <div class="flex gap-4">
+                    <a href="" class="text-gray-600 hover:text-blue-500 transition-colors">Log in</a>
+                    <a href="" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">Sign up</a>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            {% block content %}
+            
+            {% endblock content %}
+        </main>
+    </body>
+</html>
