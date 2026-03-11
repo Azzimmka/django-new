@@ -1,10 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Notes
+from .forms import NotesForm
 from django.http import Http404
-from django.views.generic import ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from notes.forms import NotesForm
 # Create your views here.
+
+# def create_note(request):
+#     if request.method == 'POST':
+#         form = NotesForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/smart/notes/')
+#     else:
+#         form = NotesForm()
+#     return render(request, 'notes/notes_form.html', {'form': form})
+
+
+#todo Create a new Note, will help us CreateView from  django.views.generic
+class NotesCreateView(CreateView):
+    # here we need 3 things
+    model = Notes # endpoints understands what is the regarding to
+    # Django запрещает одновременно указывать атрибуты fields и form_class.
+    # fields = ['title', 'text'] # we allow ther user to fill only this fields which is from out attributes
+    success_url = '/smart/' # rerendering после добаления
+    form_class = NotesForm
+
 
 class NoteListView(LoginRequiredMixin, ListView):
     model = Notes

@@ -16,6 +16,10 @@
                 <a href="{% url 'notes-detail' note.pk %}" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors inline-block">See detail →</a>
             </div>
             {% endfor %}
+        <div class="border border-gray-300 rounded-xl w-[300px] p-6 shadow-lg hover:shadow-xl transition-shadow bg-white">
+            <a href="{% url 'notes.new' %}" class="font-bold text-blue-500 text-center cursor-pointer hover:underline text-sm uppercase">Create new note</a>
+
+            </div>
         </div>
     </div>
 {% endblock %}
