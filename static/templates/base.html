@@ -5,7 +5,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-
+        <meta charset="utf-8">
+        <title>Bootstrap demo</title>
         <style>
             body{
                 font-family: "Nunito", sans-serif;
@@ -13,9 +14,6 @@
             }
 
         </style>
-        {% block style  %}
-
-        {% endblock %}
     </head>
     <body class="bg-gray-50 min-h-screen">
         <header class="bg-white shadow-md">
@@ -38,7 +36,9 @@
             {% endblock content %}
         </main>
 
+            {% block js %}
 
+            {% endblock js %}
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     </body>
 </html>

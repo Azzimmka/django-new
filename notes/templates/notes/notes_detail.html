@@ -16,5 +16,28 @@
             <p class="font-bold text-gray-500 text-sm uppercase mb-1">Created</p>
             <p class="text-gray-400 text-sm">📅 {{ note.created|date:"d.m.Y H:i" }}</p>
         </div>
+        <form method="post" class="inline" action="{% url 'notes-like' pk=note.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="bg-yellow-500 px-3 text-white rounded-2xl block mx-auto w-[100px] text-center mt-5 py-3">Upvote</button>
+        </form>
+        <a href="{% url 'notes-like' pk=note.id %}" class="bg-yellow-500 px-3 text-white rounded-2xl block mx-auto w-[100px] text-center mt-5 py-3">like 👍</a>
+        <a href="{% url 'notes-update' pk=note.id %}" class="bg-yellow-500 px-3 text-white rounded-2xl block mx-auto w-[100px] text-center mt-5 py-3">Edit</a>
+        <a href="{% url 'notes-delete' pk=note.id %}" class="bg-red-500 px-3 text-white rounded-2xl block mx-auto w-[100px] text-center mt-5 py-3">Delete</a>
+        
+        {% if note.is_public %}
+            <div class="mt-4 rounded-lg bg-yellow-50 border border-yellow-300 p-3 text-yellow-800">
+                ⚠️ This is a <b>public note</b>. Do not post private information.
+            </div>
+        {% else %}
+            <div class="mt-4">
+                <form method="post" action="{% url 'notes-make-public' note.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+                        Make Public
+                    </button>
+                </form>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

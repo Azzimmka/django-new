@@ -1,16 +1,82 @@
 {% extends 'base.html' %}
 
-
-
-{% block content  %}
-    <form  action="{% url 'notes.new' %}" method="post">
+{% block content %}
+<div class="max-w-lg mx-auto mt-10">
+    <form  method="post"
+          class="bg-white border rounded-2xl shadow p-6 space-y-5">
         {% csrf_token %}
-        {{ form }}
-        <button type="submit" class="btn btn-primary">Save</button>
-    </form>
-    {% if form.errors %}
-        <div class="text-red-500 mt-4 w-[100px] border h-[100px]">
-            {{ form.errors.title.as_text }}
+
+        {% if form.non_field_errors %}
+            <div class="rounded-lg bg-red-50 text-red-700 p-3 text-sm">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <div class="h-[100px]">
+            <label for="{{ form.title.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-1">
+                Title
+            </label>
+            {{ form.title }}
+            {% if form.title.errors %}
+                <p id="error" class="text-red-500 text-sm mt-1">{{ form.title.errors.0 }}</p>
+            {% endif %}
         </div>
-    {% endif %}
-{%  endblock %}
+
+        <div>
+            <label for="{{ form.text.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-1">
+                Text
+            </label>
+            {{ form.text }}
+            {% if form.text.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.text.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <label for="{{ form.likes.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-1">
+                Likes
+            </label>
+            {{ form.likes }}
+            {% if form.likes.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.likes.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+
+        <button type="submit"
+                class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition">
+            Save
+        </button>
+        <a type="submit" href="{% url 'notes-list' %}"
+                class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition">
+            Back
+        </a>
+        <div class="flex mt-5 items-center gap-5">
+            <label>Private:</label>
+            <input type="radio" value="private" name="select">
+            <label>Public:</label>
+            <input type="radio" value="public" name="select">
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const errorEl = document.getElementById('error');
+    if (!errorEl) return;
+
+    setTimeout(() => {
+      errorEl.style.transition = 'opacity 0.4s ease';
+      errorEl.style.opacity = '0';
+      setTimeout(() => errorEl.remove(), 400);
+    }, 5000); // 5 секунд
+  });
+</script>
+{% endblock js %}
+
+<!-- """
+{#Благодаря {{ form.as_p }} каждое поле формы (например, заголовок заметки и текст заметки) будет начинаться с новой строки. Это самый простой способ сделать форму визуально читаемой без написания лишнего кода.#}
+{#На заметку: В Django также есть {{ form.as_table }} (выводит форму в виде таблицы) и {{ form.as_ul }} (выводит в виде списка). Но .as_p используется чаще всего для простых форм.#}
+""" -->
