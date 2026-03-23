@@ -23,10 +23,17 @@
                     <a href="{% url 'notes-list' %}" class="text-gray-600 hover:text-blue-500 transition-colors font-medium">📋 Notes</a>
                     <a href="{% url 'popular-notes' %}" class="text-gray-600 hover:text-red-500 transition-colors font-medium">🔥 Popular</a>
                 </nav>
-                <div class="flex gap-4">
-                    <a href="" class="text-gray-600 hover:text-blue-500 transition-colors">Log in</a>
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Log out</button>
+                    </form>
+                {% else %}
+                    <div class="flex gap-4">
+                    <a href="{% url 'login' %}" class="text-gray-600 hover:text-blue-500 transition-colors">Log in</a>
                     <a href="" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">Sign up</a>
                 </div>
+                {% endif %}
             </div>
         </header>
 

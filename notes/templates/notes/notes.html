@@ -16,6 +16,7 @@
                 <div class="flex gap-4 flex-wrap">
                     <a href="{% url 'notes-detail' note.pk %}" class="bg-blue-500 text-white px-2 py-2 rounded-lg hover:bg-blue-600 transition-colors inline-block">See detail →</a>
                     <a href="{% url 'notes-update' note.pk %}" class="bg-yellow-500 text-white px-2 py-2 rounded-lg hover:bg-yellow-600 transition-colors inline-block">Edit →</a>
+                    <p>{{ note.is_public }}</p>
                 </div>
             </div>
             {% endfor %}

@@ -44,7 +44,7 @@ class NoteListView(LoginRequiredMixin, ListView):
     model = Notes
     context_object_name = 'notes' # это имя переменной которую ты используешь в HTML шаблоне.
     template_name = 'notes/notes.html'
-    login_url = '/admin/'
+    login_url = '/login/'
 
     def get_queryset(self):
         return self.request.user.notes.all()
@@ -122,6 +122,15 @@ def add_like_view(request, pk):
         note.save()
         return HttpResponseRedirect(reverse('notes-detail', args=(pk,)))
     return Http404
+
+def change_visibility_view(request, pk):
+    if request.method == 'POST':
+        note = get_object_or_404(Notes, pk=pk)
+        note.is_public = not note.is_public
+        note.save()
+        return HttpResponseRedirect(reverse('notes-detail', args=(pk,)))
+    return Http404
+
 
 
 def make_public_view(request, pk):

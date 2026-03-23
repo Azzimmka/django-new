@@ -124,3 +124,5 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / STATIC_URL
 ]
+
+LOGIN_REDIRECT_URL = '/smart/'
